@@ -1,10 +1,12 @@
 import './App.css';
 import { useEffect, useState } from 'react';
+import FrontendMentorFooter from './Components/FrontendMentorFooter';
+import dice from "./images/icon-dice.svg"
 
 function App() {
 
-  const [id, setID] = useState();
-  const [advice, setAdvice] = useState();
+  const [id, setID] = useState("Loading");
+  const [advice, setAdvice] = useState("Loading");
 
   const handleClick = async () => {
     try {
@@ -22,21 +24,23 @@ function App() {
       .then((data) => {
         setID(data.slip.id)
         setAdvice(data.slip.advice)
-        console.log(data.slip)
       }
       );
   },[]);
 
   return (
+    <>
     <main className='container'>
-      <div className='row'>
-        <h1>Advice #{id}</h1>
-        <p>{advice}</p>
+      <div className='row row1'>
+        <h1 className='id'>Advice #{id}</h1>
+        <p className='advice'>{'"' + advice + '"'}</p>
       </div>
-      <div className='row'>
-        <button onClick={handleClick} className='btn'>dice</button>
+      <div className='row row2'>
+        <button onClick={handleClick} className='button'><img className='dice' src={dice} alt='dice'></img></button>
       </div>
     </main>
+    <FrontendMentorFooter></FrontendMentorFooter>
+    </>
   );
 }
 
